@@ -32,7 +32,7 @@ def tokenize(string):
                 split_alphanum(string))),
         minsize=2)
     # Parse emojis:
-    emojis = [c for c in string if c in emoji.UNICODE_EMOJI]
+    emojis = [c for c in string if c in emoji.get_emoji_unicode_dict('en')]
     # Remove every non-word character and stem each word:
     string = stem_text(re.sub(r"[^\w\s,]", "", string))
     # List of stems and emojis:
@@ -64,8 +64,8 @@ def average_embedding(tokens, word2vec, na_vector=None):
     vectors = list()
 
     for token in tokens:
-        if token in word2vec:
-            vectors.append(word2vec[token])
+        if token in word2vec.wv:
+            vectors.append(word2vec.wv[token])
 
     if len(vectors) == 0 and na_vector is not None:
         vectors.append(na_vector)
@@ -145,4 +145,4 @@ sample = pd.DataFrame(min_max_scaler.transform(sample), columns=sample.columns)
 svm = pickle.load(open("svm", "rb"))
 
 # Print its prediction:
-print(svm.predict(sample)[0])
+print("It's probably clickbait" if svm.predict(sample)[0] == 1 else "Doesn't look clickbait to me")

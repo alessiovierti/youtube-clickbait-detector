@@ -6,22 +6,22 @@ Automatically detect clickbait Youtube videos from their metadata, with a 96% F1
 
 ### Python script
 
-The `predict.py` script shows an example of how the clickbait detection is done:
+The `predict.py` script shows an example of how the clickbait detection is done.
+
+Install requirements:
+
+```
+$ pip install -r requirements.txt
+```
+
+Use as follows:
 
 ```
 usage: predict.py [-h] --title TITLE [--views VIEWS] [--likes LIKES]
                   [--dislikes DISLIKES] [--comments COMMENTS]
 ```
 
-Provide the script with the title of the video to analyze and, if known, the number of views, likes, dislikes, and comments. The script will print the model prediction: 1 if the video is probably clickbait, 0 otherwise.
-
-#### Dependencies
-
-* `numpy`
-* `pandas`
-* `pickle`
-* `gensim`
-* `emoji`
+Provide the script with the title of the video to analyze and, if known, the number of views, likes, dislikes, and comments.
 
 ## How does it work?
 
